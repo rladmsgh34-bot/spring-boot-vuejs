@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spring-boot-vuejs
+  labels:
+    name: spring-boot-vuejs
+    environment: production
+

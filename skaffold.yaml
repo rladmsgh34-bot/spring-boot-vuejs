@@ -1,0 +1,59 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: spring-boot-vuejs
+
+build:
+  artifacts:
+    - image: your-registry/spring-boot-vuejs
+      docker:
+        dockerfile: Dockerfile
+  local:
+    push: false
+    useBuildkit: true
+
+deploy:
+  kubectl:
+    manifests:
+      - k8s/*.yaml
+
+portForward:
+  - resourceType: service
+    resourceName: spring-boot-vuejs-service
+    namespace: spring-boot-vuejs
+    port: 8088
+    localPort: 8088
+
+profiles:
+  - name: development
+    activation:
+      - command: dev
+    build:
+      artifacts:
+        - image: your-registry/spring-boot-vuejs
+          sync:
+            manual:
+              - src: 'backend/src/**/*.java'
+                dest: /app
+    deploy:
+      kubectl:
+        manifests:
+          - k8s/namespace.yaml
+          - k8s/configmap.yaml
+          - k8s/secret.yaml
+          - k8s/deployment.yaml
+          - k8s/service.yaml
+
+  - name: production
+    build:
+      artifacts:
+        - image: your-registry/spring-boot-vuejs
+          docker:
+            dockerfile: Dockerfile
+      tagPolicy:
+        gitCommit: {}
+    deploy:
+      kubectl:
+        manifests:
+          - k8s/*.yaml
+
