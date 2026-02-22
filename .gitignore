@@ -38,4 +38,7 @@ frontend/yarn.lock
 security/target/
 selenium-debug.log
 
+# Kubernetes secrets
+k8s/secret.yaml
+
 !.mvn/wrapper/maven-wrapper.jar

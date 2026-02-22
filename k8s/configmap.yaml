@@ -14,11 +14,18 @@ data:
   SPRING_JPA_SHOW_SQL: "false"
 
   # N8N Integration (optional)
+  # Set to "true" if you want to enable N8N integration
   N8N_ENABLED: "false"
+  # Replace with actual N8N webhook URL if enabled
   N8N_WEBHOOK_URL: "http://n8n-service:5678/webhook/your-webhook-id"
   N8N_API_URL: "http://n8n-service:5678/api/v1"
 
-  # Logging
+  # Logging - Use INFO for production, DEBUG only for troubleshooting
   LOGGING_LEVEL_ROOT: "INFO"
-  LOGGING_LEVEL_COM_EUNHO: "DEBUG"
+  LOGGING_LEVEL_COM_EUNHO: "INFO"
 
+  # Actuator endpoints for Kubernetes health checks
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,metrics,prometheus"
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"
+  MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED: "true"
+  MANAGEMENT_HEALTH_READINESSSTATE_ENABLED: "true"

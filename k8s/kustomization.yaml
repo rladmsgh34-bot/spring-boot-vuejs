@@ -6,7 +6,8 @@ namespace: spring-boot-vuejs
 resources:
   - namespace.yaml
   - configmap.yaml
-  - secret.yaml
+  # Secret is not included here - create it manually before deployment
+  # - secret.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
@@ -18,8 +19,14 @@ commonLabels:
   managed-by: kustomize
 
 # Image configuration
+# IMPORTANT: Replace 'your-registry' with your actual Docker registry
+# Examples:
+#   - Docker Hub: docker.io/yourusername/spring-boot-vuejs
+#   - AWS ECR: 123456789012.dkr.ecr.region.amazonaws.com/spring-boot-vuejs
+#   - Google GCR: gcr.io/your-project-id/spring-boot-vuejs
+#   - Azure ACR: yourregistry.azurecr.io/spring-boot-vuejs
 images:
   - name: your-registry/spring-boot-vuejs
-    newName: your-registry/spring-boot-vuejs
+    newName: your-registry/spring-boot-vuejs  # Update this with your actual registry
     newTag: latest
 

@@ -29,6 +29,8 @@ spec:
     spec:
       containers:
       - name: spring-boot-vuejs
+        # IMPORTANT: Replace with your actual Docker registry path before deployment
+        # This placeholder will cause ImagePullBackOff error
         image: your-registry/spring-boot-vuejs:latest
         imagePullPolicy: Always
         ports:
@@ -71,6 +73,36 @@ spec:
             secretKeyRef:
               name: spring-boot-vuejs-secret
               key: N8N_API_KEY
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-vuejs-config
+              key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+        - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-vuejs-config
+              key: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED
+        - name: MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-vuejs-config
+              key: MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED
+        - name: MANAGEMENT_HEALTH_READINESSSTATE_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-vuejs-config
+              key: MANAGEMENT_HEALTH_READINESSSTATE_ENABLED
+        - name: LOGGING_LEVEL_ROOT
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-vuejs-config
+              key: LOGGING_LEVEL_ROOT
+        - name: LOGGING_LEVEL_COM_EUNHO
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-vuejs-config
+              key: LOGGING_LEVEL_COM_EUNHO
         resources:
           requests:
             memory: "512Mi"

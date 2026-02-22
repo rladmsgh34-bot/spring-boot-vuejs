@@ -1,5 +1,10 @@
 # spring-boot-vuejs
 
+## 📚 Documentation
+
+- **[Security & Deployment Guide](SECURITY_DEPLOYMENT_GUIDE.md)** - 필수 보안 설정 및 배포 가이드
+- **[Kubernetes Setup](KUBERNETES_SETUP.md)** - Kubernetes 배포 상세 가이드
+
 ## Setup Vue.js & Spring Boot
 
 ### Prerequisites
